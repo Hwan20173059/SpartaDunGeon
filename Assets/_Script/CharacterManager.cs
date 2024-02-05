@@ -11,5 +11,7 @@ public class CharacterManager : MonoBehaviour
     public int def;
     public int maxHP;
     public int curHP;
+    public int gold;
+    public string Class;
 
 }
