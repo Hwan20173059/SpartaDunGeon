@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
 {
     [Header("Manager")]
     public CharacterManager CharacterManager;
+    public InventoryManager InventoryManager;
 
     [Header("Character")]
     public Image characterImage;
@@ -28,6 +29,10 @@ public class UIManager : MonoBehaviour
     public GameObject inventory;
     public GameObject state;
 
+    [Header("testItem")]
+    public Item oldSword;
+    public Item oldArmor;
+
     private void Start()
     {
         CharacterManager.expUpdate();
@@ -47,6 +52,11 @@ public class UIManager : MonoBehaviour
         defText.text = "방어력 : " + CharacterManager.def.ToString();
         healthText.text = "체력 : " + CharacterManager.maxHP.ToString() + "/" + CharacterManager.curHP.ToString();
         criticalText.text = "회심률 : " + CharacterManager.cri.ToString();
+    }
+
+    public void OnItemSlotButton()
+    {
+
     }
 
     public void OnInventoryButton()
@@ -89,5 +99,11 @@ public class UIManager : MonoBehaviour
     {
         CharacterManager.decreaseHP();
         uiUpdate();
+    }
+
+    public void OnTestGetItemButton()
+    {
+        InventoryManager.AddItem(oldSword, 0);
+        InventoryManager.AddItem(oldArmor, 1);
     }
 }
