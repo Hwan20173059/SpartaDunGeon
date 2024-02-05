@@ -26,12 +26,22 @@ public class UIManager : MonoBehaviour
     public GameObject inventory;
     public GameObject state;
 
+    private void Start()
+    {
+        uiUpdate();
+    }
+
     public void uiUpdate()
     {
         nameText.text = CharacterManager.name;
         classText.text = CharacterManager.Class;
         goldText.text = CharacterManager.gold + "G";
         levelText.text = "Lv. " + CharacterManager.level.ToString();
+
+        atkText.text = "공격력 : " + CharacterManager.atk.ToString();
+        defText.text = "방어력 : " + CharacterManager.def.ToString();
+        healthText.text = "체력 : " + CharacterManager.maxHP.ToString() + "/" + CharacterManager.curHP.ToString();
+        criticalText.text = "회심률 : " + CharacterManager.cri.ToString();
     }
 
     public void OnInventoryButton()
@@ -56,5 +66,23 @@ public class UIManager : MonoBehaviour
     {
         state.SetActive(false);
         buttons.SetActive(true);        
+    }
+
+    public void OnTestEXPButton()
+    {
+        CharacterManager.increaseExp();
+        uiUpdate();
+    }
+
+    public void OnTestHealButton()
+    {
+        CharacterManager.increaseHP();
+        uiUpdate();
+    }
+
+    public void OnTestDamageButton()
+    {
+        CharacterManager.decreaseHP();
+        uiUpdate();
     }
 }

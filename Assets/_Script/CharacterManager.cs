@@ -18,18 +18,49 @@ public class CharacterManager : MonoBehaviour
     public int curHP;
     public int atk;
     public int def;
+    public int cri;
 
     [Header("Gold")]
     public int gold;
     
     public void expUpdate()
     {
-        maxExp = level;
-
         if(curExp >= maxExp)
         {
             level++;
             curExp -= maxExp;
         }
+        maxExp = level;
+    }
+
+    public void hpUpdate()
+    {
+        if (curHP > maxHP)
+        {
+            curHP = maxHP;
+        }
+
+        if(curHP <= 0)
+        {
+            curHP = 0;
+        }
+    }
+
+    public void increaseExp()
+    {
+        curExp++;
+        expUpdate();
+    }
+
+    public void increaseHP()
+    {
+        curHP++;
+        hpUpdate();
+    }
+
+    public void decreaseHP()
+    {
+        curHP -= 10;
+        hpUpdate();
     }
 }
