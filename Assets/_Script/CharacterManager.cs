@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class CharacterManager : MonoBehaviour
 {
-    [SerializeField]
-    private string Name;
-        
+    [Header("State")]
+    public string name;
+    public int level;
+    public int atk;
+    public int def;
+    public int maxHP;
+    public int curHP;
+
 }

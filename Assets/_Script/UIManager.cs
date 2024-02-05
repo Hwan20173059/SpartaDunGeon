@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Header("Manager")]
+    public CharacterManager CharacterManager;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [Header("Character")]
+    public Image characterImage;
+    public Text nameText;
+    public Text classText;
+    public Text levelText;
+    public Text goldText;
+
+    [Header("Inventory")]
+    public GameObject inventory;
 }
