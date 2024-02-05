@@ -123,6 +123,57 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &33091488
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 33091490}
+  - component: {fileID: 33091489}
+  m_Layer: 0
+  m_Name: sword
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &33091489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 33091488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b5c0f152d142f244a8d685910875b13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 1
+  sprite: {fileID: 21300000, guid: 848661aaa6ebbc24bb36fd517cef7ff7, type: 3}
+  name: "\uB0A1\uC740 \uAC80"
+  description: "\uC774\uAC00 \uB2E4 \uBE60\uC9C4 \uB0A1\uC740 \uAC80\uC774\uB2E4."
+  type: 1
+  effect: "\uACF5\uACA9\uB825"
+  value: 5
+--- !u!4 &33091490
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 33091488}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 259.4826, y: 704.0185, z: -0.4880473}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &120960673
 GameObject:
   m_ObjectHideFlags: 0
@@ -1146,6 +1197,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 322ab1b069c4c11479e1eb98118a9fb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  items:
+  - {fileID: 33091489}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &892955195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1160,12 +1218,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Chad
   level: 9
-  atk: 10
-  def: 5
+  maxExp: 0
+  curExp: 0
+  Class: "\uC804\uC0AC"
   maxHP: 100
   curHP: 80
+  atk: 10
+  def: 5
   gold: 1050
-  Class: "\uC804\uC0AC"
 --- !u!114 &892955196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2724,7 +2784,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Lv. 09
+  m_Text: Lv. 5
 --- !u!222 &2073126760
 CanvasRenderer:
   m_ObjectHideFlags: 0
