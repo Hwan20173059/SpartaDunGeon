@@ -22,7 +22,14 @@ public class CharacterManager : MonoBehaviour
 
     [Header("Gold")]
     public int gold;
-    
+
+    [Header("Equip")]
+    public bool equipWeapon;
+    public bool equipArmor;
+    public int equipAtk;
+    public int equipDef;
+    public int equipCri;
+
     public void expUpdate()
     {
         if(curExp >= maxExp)

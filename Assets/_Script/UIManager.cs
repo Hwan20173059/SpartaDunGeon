@@ -14,6 +14,8 @@ public class UIManager : MonoBehaviour
     public Text classText;
     public Text levelText;
     public Text goldText;
+    public Slider expSlider;
+    public Text expText;
 
     [Header("State")]
     public Text atkText;
@@ -28,6 +30,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        CharacterManager.expUpdate();
         uiUpdate();
     }
 
@@ -37,6 +40,8 @@ public class UIManager : MonoBehaviour
         classText.text = CharacterManager.Class;
         goldText.text = CharacterManager.gold + "G";
         levelText.text = "Lv. " + CharacterManager.level.ToString();
+        expSlider.value = (float)CharacterManager.curExp / CharacterManager.maxExp;
+        expText.text = CharacterManager.curExp.ToString() + " / " + CharacterManager.maxExp.ToString();
 
         atkText.text = "공격력 : " + CharacterManager.atk.ToString();
         defText.text = "방어력 : " + CharacterManager.def.ToString();
