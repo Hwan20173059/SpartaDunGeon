@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: oldArmor
   m_EditorClassIdentifier: 
   id: 2
-  sprite: {fileID: 21300000, guid: 848661aaa6ebbc24bb36fd517cef7ff7, type: 3}
+  sprite: {fileID: 21300000, guid: 6fc27c9d7fc2d9448af6851bf935e6d2, type: 3}
   name: "\uB0A1\uC740 \uAC11\uC637"
   description: "\uB2E4 \uBC14\uC2A4\uB7EC\uC838\uAC00\uB294 \uB0A1\uC740 \uAC11\uC637\uC774\uB2E4"
   type: 2

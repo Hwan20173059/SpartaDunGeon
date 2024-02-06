@@ -170,11 +170,6 @@ public class UIManager : MonoBehaviour
     public void OnTestGetItemButton()
     {
         InventoryManager.AddItem(oldSword);
-        InventoryManager.AddItem(oldSword);
-        InventoryManager.AddItem(oldSword);
-        InventoryManager.AddItem(oldArmor);
-        InventoryManager.AddItem(oldArmor);
-        InventoryManager.AddItem(oldArmor);
         InventoryManager.AddItem(oldArmor);
     }
 }
