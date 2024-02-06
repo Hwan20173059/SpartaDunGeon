@@ -12,11 +12,12 @@ public class InventoryManager : MonoBehaviour
     public GameObject inventoryWindow;
 
     [Header("Selected Item")]
-    private Item selectedItem;
+    public Item selectedItem;
     public Image selectedItemSprite;
     public Text selectedItemName;
     public Text selectedItemDescription;
     public Text selectedItemEffect;
+    public int selectedIndex;
 
     public GameObject useButton;
     public GameObject equipButton;
@@ -45,34 +46,49 @@ public class InventoryManager : MonoBehaviour
         unEquipButton.SetActive(false);
     }
 
-    public void AddItem(Item item, int index)
+    public void AddItem(Item item)
     {
-        uiSlots[index].Set(item);
+        for(int i = 0; i < uiSlots.Length; i++)
+        {
+            if(uiSlots[i].item == null)
+            {
+                uiSlots[i].Set(item);
+                return;
+            }
+        }
     }
 
     public void Set(int index)
     {
-        selectedItemSprite.sprite = uiSlots[index].item.sprite;
         selectedItem = uiSlots[index].item;
+        selectedItemSprite.sprite = uiSlots[index].item.sprite;
         selectedItemName.text = uiSlots[index].item.name;
         selectedItemDescription.text = uiSlots[index].item.description;
+        selectedIndex = index;
 
         selectedItemEffect.text = uiSlots[index].item.effect + " + " + uiSlots[index].item.value;
 
         if (uiSlots[index].item.type == 1 || uiSlots[index].item.type == 2)
         {
-            if(uiSlots[index].equipped == true)
+            if (uiSlots[index].equipped == true)
+            {
+                useButton.SetActive(false);
+                equipButton.SetActive(false);
                 unEquipButton.SetActive(true);
+            }
             else
+            {
+                useButton.SetActive(false);
+                unEquipButton.SetActive(false);
                 equipButton.SetActive(true);
+            }
         }
         else
+        {
+            unEquipButton.SetActive(false);
+            equipButton.SetActive(false);
             useButton.SetActive(true);
-    }
-
-    void UpdateUI()
-    {
-        
+        }
     }
 
     public void Equip(int index)
@@ -82,12 +98,7 @@ public class InventoryManager : MonoBehaviour
 
     public void UnEquip(int index)
     {
-
-    }
-
-    public void OnUnEquipButton()
-    {
-
+        uiSlots[index].unEquipped();
     }
 
     public int getValue(int index)

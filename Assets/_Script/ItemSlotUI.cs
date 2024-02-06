@@ -31,4 +31,10 @@ public class ItemSlotUI : MonoBehaviour
         equipIcon.gameObject.SetActive(true);
         equipped = true;
     }
+
+    public void unEquipped()
+    {
+        equipIcon.gameObject.SetActive(false);
+        equipped = false;
+    }
 }

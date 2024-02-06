@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -50,9 +51,17 @@ public class UIManager : MonoBehaviour
         expSlider.value = (float)CharacterManager.curExp / CharacterManager.maxExp;
         expText.text = CharacterManager.curExp.ToString() + " / " + CharacterManager.maxExp.ToString();
 
-        atkText.text = "공격력 : " + CharacterManager.atk.ToString();
-        defText.text = "방어력 : " + CharacterManager.def.ToString();
-        healthText.text = "체력 : " + CharacterManager.maxHP.ToString() + "/" + CharacterManager.curHP.ToString();
+        if (CharacterManager.equipAtk > 0)
+            atkText.text = "공격력 : " + CharacterManager.atk.ToString() + " + " + CharacterManager.equipAtk.ToString();
+        else
+            atkText.text = "공격력 : " + CharacterManager.atk.ToString();
+
+        if (CharacterManager.equipDef > 0)
+            defText.text = "방어력 : " + CharacterManager.def.ToString() + " + " + CharacterManager.equipDef.ToString();
+        else
+            defText.text = "방어력 : " + CharacterManager.def.ToString();
+
+        healthText.text = "체력 : " + CharacterManager.curHP.ToString() + "/" + CharacterManager.maxHP.ToString();
         criticalText.text = "회심률 : " + CharacterManager.cri.ToString();
     }
 
@@ -84,9 +93,18 @@ public class UIManager : MonoBehaviour
         equipUI.SetActive(false);
     }
 
-    public void OnEquipButton(int index)
+    public void OnEquipButton()
     {
+        int index = InventoryManager.selectedIndex;
+
         InventoryManager.Equip(index);
+
+        if (InventoryManager.selectedItem.type == 1)
+            CharacterManager.equipWeapon = true;
+        else if (InventoryManager.selectedItem.type == 2)
+            CharacterManager.equipArmor = true;
+
+
         if (InventoryManager.getEffect(index) == "공격력")
         {
             CharacterManager.equipAtk += InventoryManager.getValue(index);
@@ -95,13 +113,29 @@ public class UIManager : MonoBehaviour
         {
             CharacterManager.equipDef += InventoryManager.getValue(index);
         }
+
+        uiUpdate();
+        equipUI.SetActive(false);
     }
 
-    public void OnUnEquipButton(int index)
+    public void OnUnEquipButton()
     {
-        InventoryManager.Set(index);
-        equipUI.SetActive(true);
+        int index = InventoryManager.selectedIndex;
+
+        InventoryManager.UnEquip(index);
+        if (InventoryManager.getEffect(index) == "공격력")
+        {
+            CharacterManager.equipAtk -= InventoryManager.getValue(index);
+        }
+        else if (InventoryManager.getEffect(index) == "방어력")
+        {
+            CharacterManager.equipDef -= InventoryManager.getValue(index);
+        }
+
+        uiUpdate();
+        equipUI.SetActive(false);
     }
+
 
     public void OnStateButton()
     {
@@ -135,7 +169,12 @@ public class UIManager : MonoBehaviour
 
     public void OnTestGetItemButton()
     {
-        InventoryManager.AddItem(oldSword,0);
-        InventoryManager.AddItem(oldArmor,1);
+        InventoryManager.AddItem(oldSword);
+        InventoryManager.AddItem(oldSword);
+        InventoryManager.AddItem(oldSword);
+        InventoryManager.AddItem(oldArmor);
+        InventoryManager.AddItem(oldArmor);
+        InventoryManager.AddItem(oldArmor);
+        InventoryManager.AddItem(oldArmor);
     }
 }
