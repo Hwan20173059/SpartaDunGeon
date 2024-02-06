@@ -15,6 +15,7 @@ public class Item : ScriptableObject
     [Header("info")]
     public string name;
     public string description;
+    public int price;
     public int type;
 
     [Header("effect")]

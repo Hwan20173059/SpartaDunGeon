@@ -1,15 +1,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    private int _index;
+
     [Header("Manager")]
     public CharacterManager CharacterManager;
     public InventoryManager InventoryManager;
+    public ShopManager shopManager;
 
     [Header("Character")]
     public Image characterImage;
@@ -19,6 +23,8 @@ public class UIManager : MonoBehaviour
     public Text goldText;
     public Slider expSlider;
     public Text expText;
+    public Text shopGoldText;
+    public Text PopUpWindowText;
 
     [Header("State")]
     public Text atkText;
@@ -31,6 +37,8 @@ public class UIManager : MonoBehaviour
     public GameObject inventory;
     public GameObject state;
     public GameObject equipUI;
+    public GameObject ShopUI;
+    public GameObject PopUpWindow;
 
     [Header("testItem")]
     public Item oldSword;
@@ -47,6 +55,7 @@ public class UIManager : MonoBehaviour
         nameText.text = CharacterManager.name;
         classText.text = CharacterManager.Class;
         goldText.text = CharacterManager.gold + "G";
+        shopGoldText.text = CharacterManager.gold + "G";
         levelText.text = "Lv. " + CharacterManager.level.ToString();
         expSlider.value = (float)CharacterManager.curExp / CharacterManager.maxExp;
         expText.text = CharacterManager.curExp.ToString() + " / " + CharacterManager.maxExp.ToString();
@@ -136,6 +145,20 @@ public class UIManager : MonoBehaviour
         equipUI.SetActive(false);
     }
 
+    public void OnBuyButton()
+    {
+
+        if (shopManager.shopSlots[_index].CanBuy(CharacterManager.gold))
+        {
+            CharacterManager.gold -= shopManager.shopSlots[_index].Item.price;
+            InventoryManager.AddItem(shopManager.shopSlots[_index].Item);
+            PopUpWindow.SetActive(false);
+            uiUpdate();
+        }
+        else
+            return;
+        
+    }
 
     public void OnStateButton()
     {
@@ -171,5 +194,28 @@ public class UIManager : MonoBehaviour
     {
         InventoryManager.AddItem(oldSword);
         InventoryManager.AddItem(oldArmor);
+    }
+
+    public void OnShopButton()
+    {
+        buttons.SetActive(false);
+        ShopUI.SetActive(true);
+    }
+
+    public void OnShopExitButton()
+    {
+        buttons.SetActive(true);
+        ShopUI.SetActive(false);
+    }
+
+    public void OpenPopUpWindow(int index)
+    {
+        PopUpWindow.SetActive(true);
+        _index = index;
+    }
+
+    public void PopUpWindowCancle()
+    {
+        PopUpWindow.SetActive(false);
     }
 }
