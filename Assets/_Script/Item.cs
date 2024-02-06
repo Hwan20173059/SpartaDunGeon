@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Item : MonoBehaviour
+[CreateAssetMenu(fileName = "Item", menuName = "NewItem")]
+public class Item : ScriptableObject
 {
     [Header("index")]
     public int id;

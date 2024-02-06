@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,6 +29,7 @@ public class UIManager : MonoBehaviour
     public GameObject buttons;
     public GameObject inventory;
     public GameObject state;
+    public GameObject equipUI;
 
     [Header("testItem")]
     public Item oldSword;
@@ -71,6 +73,36 @@ public class UIManager : MonoBehaviour
         buttons.SetActive(true);
     }
 
+    public void OnEquipUIButton(int index)
+    {
+        InventoryManager.Set(index);
+        equipUI.SetActive(true);
+    }
+
+    public void OnExitEquipUIButton()
+    {
+        equipUI.SetActive(false);
+    }
+
+    public void OnEquipButton(int index)
+    {
+        InventoryManager.Equip(index);
+        if (InventoryManager.getEffect(index) == "공격력")
+        {
+            CharacterManager.equipAtk += InventoryManager.getValue(index);
+        }
+        else if (InventoryManager.getEffect(index) == "방어력")
+        {
+            CharacterManager.equipDef += InventoryManager.getValue(index);
+        }
+    }
+
+    public void OnUnEquipButton(int index)
+    {
+        InventoryManager.Set(index);
+        equipUI.SetActive(true);
+    }
+
     public void OnStateButton()
     {
         buttons.SetActive(false);
@@ -103,7 +135,7 @@ public class UIManager : MonoBehaviour
 
     public void OnTestGetItemButton()
     {
-        InventoryManager.AddItem(oldSword, 0);
-        InventoryManager.AddItem(oldArmor, 1);
+        InventoryManager.AddItem(oldSword,0);
+        InventoryManager.AddItem(oldArmor,1);
     }
 }

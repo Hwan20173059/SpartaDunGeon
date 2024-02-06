@@ -1,41 +1,102 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro.EditorUtilities;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class ItemSlot
-{
-    public Item item;
-    public int count;
-}
 
 public class InventoryManager : MonoBehaviour
 {
-    public ItemSlotUI[] slotsUI;
-    public ItemSlot[] slots;
+    public ItemSlotUI[] uiSlots;
+    public Item[] items;
+
+    public GameObject inventoryWindow;
+
+    [Header("Selected Item")]
+    private Item selectedItem;
+    public Image selectedItemSprite;
+    public Text selectedItemName;
+    public Text selectedItemDescription;
+    public Text selectedItemEffect;
+
+    public GameObject useButton;
+    public GameObject equipButton;
+    public GameObject unEquipButton;
 
     private void Start()
     {
-        slots = new ItemSlot[slotsUI.Length];
-
-        for(int i = 0; i < slots.Length; i++)
+        for (int i = 0; i < uiSlots.Length; i++)
         {
-            slots[i] = new ItemSlot();
-            slotsUI[i].index = i;
-            slotsUI[i].Clear();
+            uiSlots[i].Clear();
         }
+        ClearSeletecItemWindow();
     }
 
-    public void SelectItem(int index)
+    private void ClearSeletecItemWindow()
     {
-        if (slots[index].item == null)
-            return;
+        selectedItemSprite.sprite = null;
+        selectedItem = null;
+        selectedItemName.text = string.Empty;
+        selectedItemDescription.text = string.Empty;
 
+        selectedItemEffect.text = string.Empty;
+
+        useButton.SetActive(false);
+        equipButton.SetActive(false);
+        unEquipButton.SetActive(false);
+    }
+
+    public void AddItem(Item item, int index)
+    {
+        uiSlots[index].Set(item);
+    }
+
+    public void Set(int index)
+    {
+        selectedItemSprite.sprite = uiSlots[index].item.sprite;
+        selectedItem = uiSlots[index].item;
+        selectedItemName.text = uiSlots[index].item.name;
+        selectedItemDescription.text = uiSlots[index].item.description;
+
+        selectedItemEffect.text = uiSlots[index].item.effect + " + " + uiSlots[index].item.value;
+
+        if (uiSlots[index].item.type == 1 || uiSlots[index].item.type == 2)
+        {
+            if(uiSlots[index].equipped == true)
+                unEquipButton.SetActive(true);
+            else
+                equipButton.SetActive(true);
+        }
+        else
+            useButton.SetActive(true);
+    }
+
+    void UpdateUI()
+    {
         
     }
-    
-    public void AddItem(Item _item,int i)
+
+    public void Equip(int index)
     {
-        slots[i].item = _item;
+        uiSlots[index].isEquipped();
+    }
+
+    public void UnEquip(int index)
+    {
+
+    }
+
+    public void OnUnEquipButton()
+    {
+
+    }
+
+    public int getValue(int index)
+    {
+        return uiSlots[index].item.value;
+    }
+
+    public string getEffect(int index)
+    {
+        return uiSlots[index].item.effect;
     }
 }

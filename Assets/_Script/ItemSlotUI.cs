@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,33 +9,26 @@ public class ItemSlotUI : MonoBehaviour
     public Button button;
     public Image icon;
     public Image equipIcon;
-    public Item item;
 
-    public int index;
+    public Item item;
     public bool equipped;
 
-    public void OnEquipped()
+    public void Set(Item item)
     {
-        equipped = true;
-        equipIcon.enabled = true;
-    }
-
-    public void OffEquipped()
-    {
-        equipped = false;
-        equipIcon.enabled = false;
-    }
-
-    public void Set(Item _item)
-    {
-        item = _item;
-        icon.gameObject.SetActive(true);
+        this.item = item;
         icon.sprite = item.sprite;
+        icon.gameObject.SetActive(true);
     }
 
     public void Clear()
     {
         icon.gameObject.SetActive(false);
         equipIcon.gameObject.SetActive(false);
+    }
+
+    public void isEquipped()
+    {
+        equipIcon.gameObject.SetActive(true);
+        equipped = true;
     }
 }
